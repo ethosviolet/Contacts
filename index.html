@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacts</title>
+<style>
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+    }
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 50%;
+        background: white;
+        display: none; 
+    }
+    th, td {
+        padding: 12px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    th {
+        background-color: white;
+        color: black;
+    }
+</style>
+</head>
+<body>
+
+<h1>Contacts List</h1>
+<table id="contactsTable">
+    <tr>
+        <th>Slot</th>
+        <th>Name</th>
+    </tr>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+const contacts = ["Arnold", "Sly", "Dwayne", "Vin", "JCVD", "Steven"]; 
+const table = document.getElementById("contactsTable");
+const tableBody = document.getElementById("tableBody");
+
+if (confirm("Would you like to see the contacts list?")) {
+    
+    table.style.display = "table";
+
+   
+    contacts.forEach((name, index) => {
+        const row = `<tr><td>${index}</td><td>${name}</td></tr>`;
+        tableBody.innerHTML += row;
+    });
+
+   
+    if (confirm("Would you like to search for a contact?")) {
+        searchContact();
+    }
+} else {
+    alert("Okay, maybe next time!");
+}
+
+
+function searchContact() {
+    let keepSearching = true;
+    while (keepSearching) {
+        let slot = prompt("Enter a Slot Number (0-5) to get the name:");
+
+        if (slot === null) return; 
+
+        slot = parseInt(slot);
+
+        if (!isNaN(slot) && slot >= 0 && slot < contacts.length) {
+            alert(`You selected ${contacts[slot]}.`);
+        } else {
+            alert("Name not found. Please try again.");
+        }
+
+        keepSearching = confirm("Do you want to search for another name?");
+    }
+}    
+
+
+</script>
+
+</body>
+</html>
